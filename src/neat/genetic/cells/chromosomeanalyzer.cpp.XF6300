@@ -1,0 +1,31 @@
+#include "chromosomeanalyzer.h"
+
+QPair<QSet<QGene *>, QSet<QGene *> >
+ChromosomeAnalyzer::common(QChromosome * const chromosome, QChromosome * const otherChromosome)
+{
+
+}
+
+bool ChromosomeAnalyzer::isSameSpecies(QChromosome * const chromosome, QChromosome * const otherChromosome)
+{
+
+}
+
+QPair<QChromosome *, QChromosome *>
+ChromosomeAnalyzer::compareLenOfChromosomes(QChromosome * const chromosome, QChromosome * const otherChromosome)
+{
+    QChromosome* longerChromosome = NULL;
+    QChromosome* shorterChromosome = NULL;
+
+    if(chromosome->genes().size() > otherChromosome->genes().size()) {
+        longerChromosome = chromosome;
+        shorterChromosome = otherChromosome;
+    }
+
+    else {
+        longerChromosome = otherChromosome;
+        shorterChromosome = chromosome;
+    }
+
+    return qMakePair(longerChromosome, shorterChromosome);
+}
