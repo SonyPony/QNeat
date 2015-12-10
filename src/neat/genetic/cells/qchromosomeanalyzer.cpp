@@ -61,8 +61,9 @@ QChromosomeAnalyzer::disjointAndExcessGenes(QChromosome * const chromosome, QChr
     int highestInnovationOfLowerChromosome = QChromosomeAnalyzer::chromosomeWithLowerInnovation(
                 chromosome, otherChromosome).second;
 
-    QInnovationSet disjointAndExcessInnovations = chromosome->innovations().subtract(
-                otherChromosome->innovations());
+    QInnovationSet disjointAndExcessInnovations = chromosome->innovations()
+            .unite(otherChromosome->innovations())
+            .subtract(chromosome->innovations().intersect(otherChromosome->innovations()));
     QInnovationSet disjointInnovations;
     QInnovationSet excessInnovations;
 
