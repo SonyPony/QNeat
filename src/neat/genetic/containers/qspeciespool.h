@@ -22,7 +22,6 @@ class QSpeciesPool : public QObject
         QList<QSpecies*> species() const;
         double totalFitness() const;
         void clearFitness();
-        void randomFitness() const;
 
         void evaluateAll(QList<double> inputs, std::function<int(QList<double>, QList<QNeuronValue>)> fitnessFunc);
         void nextGeneration();

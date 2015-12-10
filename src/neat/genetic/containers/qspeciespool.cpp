@@ -51,15 +51,6 @@ void QSpeciesPool::clearFitness()
     }
 }
 
-void QSpeciesPool::randomFitness() const
-{
-    for(QSpecies* species: m_species) {
-        for(QChromosome* chromosome: species->chromosomes()) {
-            chromosome->setFitness(QNeatCore::randomNumber() * 2.);
-        }
-    }
-}
-
 void QSpeciesPool::evaluateAll(QList<double> inputs, std::function<int(QList<double>, QList<QNeuronValue>)> fitnessFunc)
 {
     QNeuralNetwork* tempNetwork = NULL;
