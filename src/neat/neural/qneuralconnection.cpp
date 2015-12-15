@@ -1,10 +1,6 @@
 #include "qneuralconnection.h"
 #include "../core/qneatcore.h"
 #include "../core/qinnovation.h"
-#define DEBUG
-#ifdef DEBUG
-#include <QDebug>
-#endif
 
 QNeuralConnection::QNeuralConnection(int input, int output, double weight, QObject *parent) : QObject(parent)
 {
@@ -13,14 +9,10 @@ QNeuralConnection::QNeuralConnection(int input, int output, double weight, QObje
     m_weight = weight;
     m_enabled = true;
     m_innovation = QNeatCore::instance().getInnovationNumber(QInnovation(input, output));
-    //qDebug() << "Connection - " << m_input << " to " << m_output << " - " << m_innovation;
 }
 
 QNeuralConnection::~QNeuralConnection()
 {
-#ifdef DEBUG
-    //qDebug() << "Deleting connection - " << m_input << " to " << m_output;
-#endif
 }
 
 bool QNeuralConnection::enabled() const

@@ -1,10 +1,6 @@
 #include "qneuron.h"
 #include "../core/qextendedmath.h"
 
-#ifdef DEBUG
-#include <QDebug>
-#endif
-
 QNeuron::QNeuron(int type, int id, QObject *parent): QObject(parent)
 {
     m_type = type;
@@ -13,9 +9,6 @@ QNeuron::QNeuron(int type, int id, QObject *parent): QObject(parent)
 
 QNeuron::~QNeuron()
 {
-#ifdef DEBUG
-    qDebug() << "Deleting neuron - " << m_ID;
-#endif
 }
 
 void QNeuron::setValue(double v)
@@ -38,7 +31,6 @@ QNeuronValue QNeuron::value()
 
         for(int key: m_inputNeurons.keys()) {
             QNeuronValue neuronValue(m_inputNeurons[key]->value());
-
             if(neuronValue.valid())
                 sum += neuronValue.value() * m_inputWeights[key];
         }

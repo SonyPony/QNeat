@@ -1,6 +1,7 @@
 #include "qspeciespool.h"
 #include <qmath.h>
 #include <QDebug>
+#include <QTextStream>
 #include "../../core/qneatcore.h"
 #include "../../neural/qneuronvalue.h"
 #include "../../qneatsettings.h"
@@ -55,10 +56,15 @@ void QSpeciesPool::evaluateAll(QList<double> inputs, std::function<int(QList<dou
     for(QSpecies* species: m_species) {
         for(QChromosome* chromosome: species->chromosomes()) {
             tempNetwork = chromosome->toNetwork();
-            results = tempNetwork->evaluate(inputs);
-            tempNetwork->deleteLater();
 
-            chromosome->setFitness(chromosome->fitness() + fitnessFunc(inputs, results));
+            results = tempNetwork->evaluate(inputs);
+            chromosome->addToFitness(fitnessFunc(inputs, results));
+
+            tempNetwork->deleteLater();
+        }
+    }
+}
+
 QChromosome* QSpeciesPool::resultFound(std::function<bool (int)> checkMaxFunc)
 {
     for(QSpecies* species: m_species) {
@@ -79,8 +85,7 @@ void QSpeciesPool::nextGeneration()
     int numberOfChildren;
 
     for(QSpecies* species: m_species) {
-        //qDebug() << "---------------------";
-        //qDebug() << species << " contains " << species->chromosomes().size() << " and have sf " << species->averageFitness();
+        qDebug() << species << " contains " << species->chromosomes().size() << " and has shared fitness " << species->averageFitness();
         if(this->totalFitness() <= 0)
             numberOfChildren = QNeatSettings::Population;
         else
@@ -107,8 +112,6 @@ void QSpeciesPool::nextGeneration()
 QSpecies *QSpeciesPool::newSpecies()
 {
     QSpecies* species = new QSpecies;
-    if(species == NULL)
-        qDebug() << "NULL";
     m_species.append(species);
     return species;
 }

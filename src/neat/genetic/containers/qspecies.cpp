@@ -39,16 +39,8 @@ QChromosome *QSpecies::breedChild() const
 
 void QSpecies::mutate()
 {
-    for(QChromosome* chromosome: m_chromosomes) {
+    for(QChromosome* chromosome: m_chromosomes)
         QMutator::mutateChromosome(chromosome);
-        //QMutator::newNode(chromosome);
-        //QMutator::newLink(chromosome);
-        /*for(QGene* gene: chromosome->genes())
-            QMutator::mutateGeneWeight(gene);
-
-        QMutator::mutateChromosomeGenesEnable(chromosome);
-        QMutator::newNode(chromosome);*/
-    }
 }
 
 void QSpecies::removeWorstHalf()

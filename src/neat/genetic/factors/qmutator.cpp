@@ -23,7 +23,7 @@ void QMutator::mutateChromosomeGenesEnable(QChromosome *chromosome)
     for(QGene* gene: chromosome->genes()) {
         if(QNeatCore::randomNumber() < QNeatSettings::DisableGeneChance)
             gene->setEnabled(false);
-        else if(QNeatCore::randomNumber() < QNeatSettings::EnableGeneChance)
+        if(QNeatCore::randomNumber() < QNeatSettings::EnableGeneChance)
             gene->setEnabled(true);
     }
 }
@@ -77,10 +77,6 @@ void QMutator::newNode(QChromosome *chromosome)
     int rn = qrand() % linns.length();
     int geneIndex = linns[rn];
     QGene* selectedGene = chromosome->gene(geneIndex);
-    if(selectedGene == NULL)
-        qDebug() << "------" << rn << linns.at(rn) << geneIndex << linns;
-    else
-        ;//qDebug() << rn << linns.at(rn) << geneIndex << linns;
     selectedGene->setEnabled(false);
 
     qSort(linns);
@@ -88,11 +84,11 @@ void QMutator::newNode(QChromosome *chromosome)
     // first gene
     QNeuralConnection* c1 = new QNeuralConnection(selectedGene->input(), highestNeuronIndex + 1, 1.);
     QNeuralConnection* c2 = new QNeuralConnection(highestNeuronIndex + 1, selectedGene->output(), selectedGene->weight());
-    Q_ASSERT_X(c1->input() != c1->output(), "io", "c1 shit");
-    Q_ASSERT_X(c2->input() != c2->output(), "io", "c2 shit");
+
     chromosome->addGene(new QGene(c1));
     // second gene
     chromosome->addGene(new QGene(c2));
+
     c1->deleteLater();
     c2->deleteLater();
 }
@@ -111,10 +107,8 @@ void QMutator::newLink(QChromosome *chromosome)
         outID = network->randomNeuron(QNeuron::Input | QNeuron::Bias);
 
         newConnection = new QNeuralConnection(inID, outID, 1);
-        //qDebug() << "checking" << newConnection;
-        //network->checkReccurentConnection(newConnection);
-
     } while(network->checkReccurentConnection(newConnection));
+
     chromosome->addGene(new QGene(inID, outID, QNeatCore::randomNumber() * 2. - 1.));
     delete network;
 }

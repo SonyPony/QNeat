@@ -98,10 +98,6 @@ QList<QNeuronValue> QNeuralNetwork::evaluate(QList<double> inputs)
 {
     Q_ASSERT_X(inputs.length() == QNeatSettings::InputsCount, "inputs", "Inputs size does not match QNeatSettings::InputsCount");
 
-    /*for(int key: m_neurons.keys()) {
-        qDebug() << m_neurons[key]->strType() << " " << key << "=" << m_neurons[key]->ID();
-    }*/
-
     QList<QNeuronValue> results;
 
     // clear neurons weights and neurons
@@ -146,30 +142,17 @@ bool QNeuralNetwork::checkReccurentConnection(QNeuralConnection *connection)
 
     QSet<int> expandedLayer;
 
-    //qDebug() << "exanding";
-    //int f =0;
     while(currentLayer.size()) {
-        /*if(f++ > 10) {
-            qDebug() << "++++++++++++++++++++++++++++++++++++++++++++";
-            qDebug() << "My con" <<connection->input() << " -> " << connection->output();
-            for(QNeuralConnection* c: m_connections)
-                qDebug() << c->input() << " -> " << c->output();
-            qDebug() << "---------------------------------------";
-            for(QNeuron* n: m_neurons)
-                qDebug() << n->strType() << n->ID();
-            qDebug() << "++++++++++++++++++++++++++++++++++++++++++++";
-        }*/
         expandedLayer = this->expandLayerPaths(currentLayer);
         currentLayer = this->removeOutputNeuronsFromLayer(expandedLayer);
 
         // if startNeuronID is found in expanded layer
         if(currentLayer.contains(startNeuron->ID())) {
             this->removeConnection(connection);
-            //qDebug() << "done exanding";
             return true;
         }
     }
-    //qDebug() << "done exanding";
+
     this->removeConnection(connection);
     return false;
 }
@@ -237,10 +220,6 @@ void QNeuralNetwork::removeConnection(QNeuralConnection *connection)
     int outID = connection->output();
 
     if(m_connections.keys().contains(connection->innovation())) {
-        /*if(m_neurons[inID]->outputs().size() == 1 && m_neurons[inID]->outputs().contains(outID))
-            this->removeNeuron(inID);
-        if(m_neurons[outID]->inputs().size() == 1 && m_neurons[outID]->inputs().contains(inID))
-            this->removeNeuron(outID);*/
         m_connections.remove(connection->innovation());
         m_neurons[inID]->removeOutput(outID);
         m_neurons[outID]->removeInput(inID);
