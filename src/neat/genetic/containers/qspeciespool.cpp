@@ -59,8 +59,16 @@ void QSpeciesPool::evaluateAll(QList<double> inputs, std::function<int(QList<dou
             tempNetwork->deleteLater();
 
             chromosome->setFitness(chromosome->fitness() + fitnessFunc(inputs, results));
+QChromosome* QSpeciesPool::resultFound(std::function<bool (int)> checkMaxFunc)
+{
+    for(QSpecies* species: m_species) {
+        for(QChromosome* chromosome: species->chromosomes()) {
+            if(checkMaxFunc(chromosome->fitness()))
+                return chromosome;
         }
     }
+
+    return NULL;
 }
 
 void QSpeciesPool::nextGeneration()

@@ -24,6 +24,7 @@ class QSpeciesPool : public QObject
         void clearFitness();
 
         void evaluateAll(QList<double> inputs, std::function<int(QList<double>, QList<QNeuronValue>)> fitnessFunc);
+        QChromosome* resultFound(std::function<bool (int)> checkMaxFunc);
         void nextGeneration();
         QSpecies* newSpecies();
         void removeWeakSpecies();
