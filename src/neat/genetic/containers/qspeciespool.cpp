@@ -13,11 +13,7 @@ void QSpeciesPool::generateInitialChromosomes()
 
     for(int i = 0; i < QNeatSettings::Population; i++) {
         newNetwork = new QNeuralNetwork;
-        if(newNetwork == NULL)
-            qDebug() << "NULL";
         QChromosome* chromosome = new QChromosome(newNetwork);
-        if(chromosome == NULL)
-            qDebug() << "NULL";
         this->addChromosomeToPool(chromosome);
         newNetwork->deleteLater();
     }

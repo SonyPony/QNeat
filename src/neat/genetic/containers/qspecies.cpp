@@ -40,9 +40,9 @@ QChromosome *QSpecies::breedChild() const
 void QSpecies::mutate()
 {
     for(QChromosome* chromosome: m_chromosomes) {
-        //QMutator::mutateChromosome(chromosome);
-        QMutator::newNode(chromosome);
-        QMutator::newLink(chromosome);
+        QMutator::mutateChromosome(chromosome);
+        //QMutator::newNode(chromosome);
+        //QMutator::newLink(chromosome);
         /*for(QGene* gene: chromosome->genes())
             QMutator::mutateGeneWeight(gene);
 

@@ -67,8 +67,6 @@ QString QGene::toString()
 QNeuralConnection* QGene::toConnection()
 {
     QNeuralConnection* connection = new QNeuralConnection(m_input, m_output, m_weight);
-    if(connection == NULL)
-        qDebug() << "NULL";
     connection->setEnabled(m_enabled);
 
     return connection;
