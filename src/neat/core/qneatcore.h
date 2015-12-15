@@ -25,7 +25,7 @@ class QNeatCore : public QObject
         static QList<QGene*> sortGenes(QList<QGene*> genes);
         static QString addColor(QString text, QString color);
         static QString formatGenes(QList<QGene*> genes);
-        static QString formatGenes(QChromosome* chromosome);
+        static QString formatGenes(QChromosome* chromosome, bool colored = true);
 };
 
 #endif // QNEATCORE_H

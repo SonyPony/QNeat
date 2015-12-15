@@ -78,7 +78,7 @@ QString QNeatCore::formatGenes(QList<QGene *> genes) {
     return firstLine + "\n" + secondLine;
 }
 
-QString QNeatCore::formatGenes(QChromosome *chromosome) {
+QString QNeatCore::formatGenes(QChromosome *chromosome, bool colored) {
     QString firstLine("");
     QString secondLine("");
     QString color;
@@ -86,13 +86,20 @@ QString QNeatCore::formatGenes(QChromosome *chromosome) {
     for(QGene* gene: QNeatCore::sortGenes(chromosome->genes().toList())) {
         QStringList temp = gene->toString().split("\n");
 
-        if(!gene->enabled())
-            color = "31m";
-        else
-            color = "32m";
+        if(colored) {
+            if(!gene->enabled())
+                color = "31m";
+            else
+                color = "32m";
 
-        firstLine.append(QNeatCore::addColor(temp[0], color));
-        secondLine.append(QNeatCore::addColor(temp[1], color));
+            firstLine.append(QNeatCore::addColor(temp[0], color));
+            secondLine.append(QNeatCore::addColor(temp[1], color));
+        }
+
+        else {
+            firstLine.append(temp[0]);
+            secondLine.append(temp[1]);
+        }
     }
 
     return firstLine + "\n" + secondLine + "\n";
