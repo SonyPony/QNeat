@@ -81,7 +81,7 @@ QNeuralNetwork* QChromosome::toNetwork()
         startNeuron->addOutput(connection->output());
         endNeuron->addInput(connection->input());
         Q_ASSERT_X(connection->input() != connection->output(), "io", "conversion");
-        //network->addConnection(connection);
+        network->addConnection(connection);
     }
 
     return network;
