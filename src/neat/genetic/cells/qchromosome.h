@@ -26,6 +26,7 @@ class QChromosome : public QObject
         QGene* gene(int innovation) const;
 
         void setFitness(int fitness);
+        void addToFitness(int fitness);
         void addGene(QGene* gene);
         bool hasGene(QGene* gene) const;
         QNeuralNetwork* toNetwork();

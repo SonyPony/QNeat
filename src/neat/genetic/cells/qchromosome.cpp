@@ -42,6 +42,11 @@ void QChromosome::setFitness(int fitness)
     m_fitness = fitness;
 }
 
+void QChromosome::addToFitness(int fitness)
+{
+    m_fitness += fitness;
+}
+
 void QChromosome::addGene(QGene *gene)
 {
     gene->setParent(this);
