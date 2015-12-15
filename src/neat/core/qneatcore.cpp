@@ -67,9 +67,9 @@ QString QNeatCore::formatGenes(QList<QGene *> genes) {
         QStringList temp = gene->toString().split("\n");
 
         if(!gene->enabled())
-            color = "31m";
+            color = "31m";  // lime
         else
-            color = "32m";
+            color = "32m";  // red
 
         firstLine.append(QNeatCore::addColor(temp[0], color));
         secondLine.append(QNeatCore::addColor(temp[1], color));
