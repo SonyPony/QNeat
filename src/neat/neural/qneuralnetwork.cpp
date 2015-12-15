@@ -89,6 +89,11 @@ QNeuron *QNeuralNetwork::neuron(int neuronID) const
     return m_neurons[neuronID];
 }
 
+QList<QNeuron *> QNeuralNetwork::neurons() const
+{
+    return m_neurons.values();
+}
+
 QList<QNeuronValue> QNeuralNetwork::evaluate(QList<double> inputs)
 {
     Q_ASSERT_X(inputs.length() == QNeatSettings::InputsCount, "inputs", "Inputs size does not match QNeatSettings::InputsCount");

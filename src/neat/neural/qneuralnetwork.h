@@ -31,6 +31,7 @@ class QNeuralNetwork : public QObject
         QMap<int, QNeuralConnection*> connections() const;
         bool hasNeuron(int neuronID) const;
         QNeuron* neuron(int neuronID) const;
+        QList<QNeuron*> neurons() const;
 
         void addNeuron(QNeuron* neuron, int id = -1);
         void addConnection(QNeuralConnection* connection);
