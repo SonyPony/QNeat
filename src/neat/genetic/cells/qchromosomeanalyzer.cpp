@@ -82,18 +82,18 @@ QChromosomeAnalyzer::disjointAndExcessGenes(QChromosome * const chromosome, QChr
     for(int innovation: disjointInnovations) {
         // has gene
         if(chromosome->innovations().contains(innovation))
-            disjointGenes.insert(new QGene(chromosome->gene(innovation)));
+            disjointGenes.insert(chromosome->gene(innovation));
         else
-            disjointGenes.insert(new QGene(otherChromosome->gene(innovation)));
+            disjointGenes.insert(otherChromosome->gene(innovation));
     }
 
     // fill excess genes
     for(int innovation: excessInnovations) {
         // has gene
         if(chromosome->innovations().contains(innovation))
-            excessGenes.insert(new QGene(chromosome->gene(innovation)));
+            excessGenes.insert(chromosome->gene(innovation));
         else
-            excessGenes.insert(new QGene(otherChromosome->gene(innovation)));
+            excessGenes.insert(otherChromosome->gene(innovation));
     }
 
     return qMakePair(disjointGenes, excessGenes);
