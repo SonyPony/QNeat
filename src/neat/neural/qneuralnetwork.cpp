@@ -64,6 +64,11 @@ QNeuralNetwork::QNeuralNetwork(QObject *parent) : QObject(parent)
 
 QNeuralNetwork::~QNeuralNetwork()
 {
+    for(QNeuron* neuron: m_neurons.values())
+        delete neuron;
+
+    for(QNeuralConnection* connection: m_connections.values())
+        delete connection;
     //qDebug() << "Deleting network";
 }
 
@@ -209,7 +214,7 @@ void QNeuralNetwork::removeNeuron(int neuronID)
     QNeuron* neuron = m_neurons[neuronID];
     m_neurons.remove(neuronID);
 
-    neuron->deleteLater();
+    delete neuron;
 
     m_neuronsCount = this->lastNeuronID();
 }
@@ -224,7 +229,7 @@ void QNeuralNetwork::removeConnection(QNeuralConnection *connection)
         m_neurons[inID]->removeOutput(outID);
         m_neurons[outID]->removeInput(inID);
 
-        connection->deleteLater();
+        delete connection;
     }
 }
 
