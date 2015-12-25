@@ -16,13 +16,19 @@ void QSpeciesPool::generateInitialChromosomes()
         newNetwork = new QNeuralNetwork;
         QChromosome* chromosome = new QChromosome(newNetwork);
         this->addChromosomeToPool(chromosome);
-        newNetwork->deleteLater();
+        delete newNetwork;
     }
 }
 
 QSpeciesPool::QSpeciesPool(QObject *parent) : QObject(parent)
 {
     this->generateInitialChromosomes();
+}
+
+QSpeciesPool::~QSpeciesPool()
+{
+    for(QSpecies* species: m_species)
+        delete species;
 }
 
 QList<QSpecies *> QSpeciesPool::species() const
@@ -60,7 +66,7 @@ void QSpeciesPool::evaluateAll(QList<double> inputs, std::function<int(QList<dou
             results = tempNetwork->evaluate(inputs);
             chromosome->addToFitness(fitnessFunc(inputs, results));
 
-            tempNetwork->deleteLater();
+            delete tempNetwork;
         }
     }
 }
@@ -128,7 +134,7 @@ void QSpeciesPool::removeWeakSpecies()
         // if it would not reproduce any child, than remove it
         if(numberOfNeededChildren < 1) {
             m_species.removeAll(species);
-            species->deleteLater();
+            delete species;
         }
     }
 }

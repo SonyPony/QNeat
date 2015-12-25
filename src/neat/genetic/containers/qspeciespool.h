@@ -18,6 +18,7 @@ class QSpeciesPool : public QObject
 
     public:
         QSpeciesPool(QObject *parent = 0);
+        ~QSpeciesPool();
 
         QList<QSpecies*> species() const;
         double totalFitness() const;
