@@ -71,6 +71,19 @@ void QSpeciesPool::evaluateAll(QList<double> inputs, std::function<int(QList<dou
     }
 }
 
+QChromosome *QSpeciesPool::interspeciesCrossover()
+{
+    QSet<int> speciesKeys;
+
+    while(speciesKeys.size() < 2)
+        speciesKeys.insert(qrand() % m_species.length());
+    QList<int> speciesKeysList = speciesKeys.toList();
+    QSpecies* species1 = m_species[speciesKeysList.at(0)];
+    QSpecies* species2 = m_species[speciesKeysList.at(1)];
+
+    return QMutator::breedChild(species1->randomChromosome(), species2->randomChromosome());
+}
+
 QChromosome* QSpeciesPool::resultFound(std::function<bool (int)> checkMaxFunc)
 {
     for(QSpecies* species: m_species) {
@@ -89,6 +102,9 @@ void QSpeciesPool::nextGeneration()
 
     QList<QChromosome*> children;
     int numberOfChildren;
+
+    if(QNeatCore::randomNumber() < QNeatSettings::InterSpeciesCrossoverChange)
+        children.append(this->interspeciesCrossover());
 
     for(QSpecies* species: m_species) {
         qDebug() << species << " contains " << species->chromosomes().size() << " and has shared fitness " << species->averageFitness();

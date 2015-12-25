@@ -27,6 +27,7 @@ class QNeatSettings
         static constexpr double newNodeChance = 0.03;
         static constexpr double DisableGeneChance = 0.04;
         static constexpr double EnableGeneChance = 0.02;
+        static constexpr double InterSpeciesCrossoverChange = 0.04;
 
         static constexpr double MutationStep = 0.1;
 };
