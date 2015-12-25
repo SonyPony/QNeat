@@ -61,7 +61,7 @@ void QSpecies::removeWorstHalf()
     for(int i = 0; i < m_chromosomes.length() / 2; i++) {
         QChromosome* chromosome = m_chromosomes.last();
         m_chromosomes.removeLast();
-        chromosome->deleteLater();
+        delete chromosome;
     }
 }
 
@@ -72,7 +72,7 @@ void QSpecies::removeAllExceptBest()
     for(int i = 1; i < m_chromosomes.length(); i++) {
         QChromosome* chromosome = m_chromosomes.last();
         m_chromosomes.removeLast();
-        chromosome->deleteLater();
+        delete chromosome;
     }
 }
 
