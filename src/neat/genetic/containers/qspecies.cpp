@@ -14,6 +14,12 @@ QSpecies::QSpecies(QObject *parent) : QObject(parent)
 
 }
 
+QSpecies::~QSpecies()
+{
+    for(QChromosome* chromosome: m_chromosomes)
+        delete chromosome;
+}
+
 QList<QChromosome *> QSpecies::chromosomes() const
 {
     return m_chromosomes;

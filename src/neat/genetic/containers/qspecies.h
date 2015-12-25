@@ -22,6 +22,7 @@ class QSpecies : public QObject
         double averageFitness() const;
 
         QChromosome* breedChild() const;
+        QChromosome* randomChromosome() const;
         void mutate();
         void removeWorstHalf();
         void removeAllExceptBest();
