@@ -37,10 +37,15 @@ double QSpecies::averageFitness() const
 
 QChromosome *QSpecies::breedChild() const
 {
-    QChromosome* parent1 = m_chromosomes[qrand() % m_chromosomes.length()];
-    QChromosome* parent2 = m_chromosomes[qrand() % m_chromosomes.length()];
+    QChromosome* parent1 = this->randomChromosome();
+    QChromosome* parent2 = this->randomChromosome();
 
     return QMutator::breedChild(parent1, parent2);
+}
+
+QChromosome *QSpecies::randomChromosome() const
+{
+    return m_chromosomes[qrand() % m_chromosomes.length()];
 }
 
 void QSpecies::mutate()
