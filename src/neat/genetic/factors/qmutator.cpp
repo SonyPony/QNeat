@@ -89,8 +89,8 @@ void QMutator::newNode(QChromosome *chromosome)
     // second gene
     chromosome->addGene(new QGene(c2));
 
-    c1->deleteLater();
-    c2->deleteLater();
+    delete c1;
+    delete c2;
 }
 
 void QMutator::newLink(QChromosome *chromosome)
