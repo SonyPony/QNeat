@@ -22,6 +22,12 @@ QChromosome::QChromosome(QChromosome *other, QObject *parent): QObject(parent)
         this->addGene(new QGene(gene));
 }
 
+QChromosome::~QChromosome()
+{
+    for(QGene* gene: m_genes.values())
+        delete gene;
+}
+
 int QChromosome::fitness() const
 {
     return m_fitness;

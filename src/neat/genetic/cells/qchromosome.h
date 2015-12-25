@@ -20,6 +20,7 @@ class QChromosome : public QObject
         QChromosome(QObject* parent = 0);
         QChromosome(QNeuralNetwork* network, QObject *parent = 0);
         QChromosome(QChromosome *other, QObject *parent = 0);
+        ~QChromosome();
 
         int fitness() const;
         QGeneSet genes() const;
