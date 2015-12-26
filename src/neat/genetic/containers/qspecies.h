@@ -17,6 +17,7 @@ class QSpecies : public QObject
 
     public:
         QSpecies(QObject *parent = 0);
+        ~QSpecies();
 
         QList<QChromosome*> chromosomes() const;
         double averageFitness() const;
