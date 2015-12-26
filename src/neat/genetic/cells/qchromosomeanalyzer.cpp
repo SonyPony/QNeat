@@ -107,7 +107,7 @@ bool QChromosomeAnalyzer::isSameSpecies(QChromosome * const chromosome, QChromos
     QGeneSet excess = disjointAndExcess.second;
 
     double dExcess = QNeatSettings::ExcessCoefficient * excess.size();
-    double dDisjoint = QNeatSettings::DisableGeneChance * disjoint.size();
+    double dDisjoint = QNeatSettings::DisjointCoefficient * disjoint.size();
     double dWeights = QNeatSettings::WeightCoefficient * QChromosomeAnalyzer::averageWeightDifferences(chromosome, otherChromosome);
 
     return (dExcess + dDisjoint + dWeights) < QNeatSettings::DeltaThreshold;
